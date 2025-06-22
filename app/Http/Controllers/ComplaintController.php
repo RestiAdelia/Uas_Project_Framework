@@ -11,7 +11,7 @@ class ComplaintController extends Controller
     // Tampilkan semua pengaduan
     public function index()
     {
-        $complains = Complain::latest()->paginate(6); // Batas 6 data per halaman
+        $complains = Complain::latest()->paginate(3); // Batas 6 data per halaman
         return view('index', compact('complains'));
     }
 
@@ -31,7 +31,7 @@ class ComplaintController extends Controller
             'judul' => 'required|string|max:255',
             'deskripsi' => 'required|string',
             'kategori_id' => 'required|exists:resti_categories,id',
-            'file' => 'nullable|file|mimes:jpg,jpeg,png|max:2048', // max 2MB
+            'file' => 'nullable|file|mimes:jpg,jpeg,webp|max:2048', // max 2MB
         ]);
 
 

@@ -1,76 +1,100 @@
 @extends('layouts.app')
+@section('title', 'Data Pengaduan')
 
 @section('content')
-    <h2>Form Pengaduan</h2>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
 
-    @if (session('success'))
-        <p style="color: green;">{{ session('success') }}</p>
-    @endif
+            <div class="card shadow-sm">
+                <div class="card-header  text-center">
+                    <h4 class="mb-0">Form Pengaduan</h4>
+                </div>
+                <div class="card-body">
 
-    <style>
-        .form-group {
-            position: relative;
-            margin-bottom: 1.5rem;
-        }
+                    {{-- Success Message --}}
+                    @if (session('success'))
+                        <div class="alert alert-success text-center">
+                            {{ session('success') }}
+                        </div>
+                    @endif
 
-        .form-control {
-            width: 100%;
-            padding: 1rem 0.5rem 0.5rem 0.5rem;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            background: none;
-        }
+                    {{-- Error Message --}}
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul class="mb-0">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
 
-        .form-label {
-            position: absolute;
-            top: 1rem;
-            left: 0.5rem;
-            color: #aaa;
-            transition: all 0.2s ease-in-out;
-            pointer-events: none;
-        }
+                    <form action="{{ route('complain.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="id_pelapor" value="{{ $id_pelapor }}">
 
-        .form-control:focus+.form-label,
-        .form-control:not(:placeholder-shown)+.form-label {
-            top: -0.5rem;
-            left: 0.5rem;
-            background: #fff;
-            padding: 0 0.2rem;
-            color: #333;
-            font-size: 0.8rem;
-        }
-    </style>
+                        <!-- Judul -->
+                        <div class="form-floating mb-3">
+                            <input type="text" name="judul"
+                                   class="form-control @error('judul') is-invalid @enderror"
+                                   id="judul" placeholder="Judul"
+                                   value="{{ old('judul') }}" required>
+                            <label for="judul">Judul</label>
+                            @error('judul')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
 
-    <form action="{{ route('complain.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <input type="hidden" name="id_pelapor" value="{{ $id_pelapor }}">
+                        <!-- Deskripsi -->
+                        <div class="form-floating mb-3">
+                            <textarea name="deskripsi"
+                                      class="form-control @error('deskripsi') is-invalid @enderror"
+                                      id="deskripsi" placeholder="Deskripsi"
+                                      style="height: 120px;" required>{{ old('deskripsi') }}</textarea>
+                            <label for="deskripsi">Deskripsi</label>
+                            @error('deskripsi')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
 
-        <div class="form-group">
-            <input type="text" name="judul" class="form-control" placeholder=" " required>
-            <label class="form-label">Judul</label>
+                        <!-- Kategori -->
+                        <div class="form-floating mb-3">
+                            <select name="kategori_id"
+                                    class="form-select @error('kategori_id') is-invalid @enderror"
+                                    id="kategori_id" required>
+                                <option value="" disabled hidden>Pilih Kategori</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}" {{ old('kategori_id') == $category->id ? 'selected' : '' }}>
+                                        {{ $category->nama_kategori }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <label for="kategori_id">Kategori</label>
+                            @error('kategori_id')
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <!-- File Upload -->
+                        <div class="mb-3">
+                            <label for="file" class="form-label">Upload File (Opsional)</label>
+                            <input type="file" name="file" id="file" class="form-control @error('file') is-invalid @enderror">
+                            @error('file')
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <!-- Submit -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success">Kirim Pengaduan</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
         </div>
-
-        <div class="form-group">
-            <textarea name="deskripsi" class="form-control" placeholder=" " required></textarea>
-            <label class="form-label">Deskripsi</label>
-        </div>
-
-        <div class="form-group">
-            <select name="kategori_id" class="form-control" required>
-                <option value="" disabled selected hidden>Pilih Kategori</option>
-                @foreach ($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->nama_kategori }}</option>
-                @endforeach
-            </select>
-
-            <label class="form-label">Kategori</label>
-        </div>
-
-        <div class="form-group">
-            <input type="file" name="file" class="form-control" placeholder=" ">
-            <label class="form-label">Upload File (Opsional)</label>
-        </div>
-
-        <button type="submit" class="btn btn-success">Kirim Pengaduan</button>
-    </form>
+    </div>
+</div>
 @endsection

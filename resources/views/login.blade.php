@@ -3,11 +3,14 @@
 @section('title', 'Login')
 
 @section('content')
-   <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 
     <form method="POST" action="{{ route('login') }}" class="login-form">
         @csrf
-        <div class="login-title">Login</div>
+        <div class="d-flex justify-content-center align-items-center">
+            <h2 class="text-center">Login</h2>
+        </div>
+
 
         <div>
             <input id="email" type="email" name="email" placeholder="Email" value="{{ old('email') }}" required

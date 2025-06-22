@@ -15,7 +15,7 @@ class PelaporController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required|string|max:255',
+            'nama' => 'required|string|max:40',
             'nik' => 'required|string|max:16',
             'telepon' => 'required|string|max:15',
         ]);
