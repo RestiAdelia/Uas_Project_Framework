@@ -1,0 +1,79 @@
+.login-form {
+    max-width: 350px;
+    margin: 100px auto; /* posisikan ke tengah horizontal */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    padding: 20px;
+    border: 1px solid #ccc; /* opsional, biar kelihatan kotak */
+    border-radius: 8px; /* sudut tumpul */
+    background-color: #fff; /* putih (warna dasar form) */
+}
+
+.login-title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #064e3b;
+    /* Dark green */
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 0.75rem;
+    margin: 0.5rem 0;
+    border: 1px solid #d1d5db;
+    /* Light gray */
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #16a34a;
+    /* Emerald green */
+    outline: none;
+    box-shadow: 0 0 5px rgba(22, 163, 74, 0.5);
+}
+
+.error-text {
+    color: #dc2626;
+    /* Red for error messages */
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+label {
+    display: flex;
+    align-items: center;
+    margin: 0.5rem 0;
+    font-size: 0.875rem;
+    color: #4d7c63;
+    /* Lighter green */
+}
+
+button {
+    background-color: #16a34a;
+    /* Emerald green */
+    color: white;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #15803d;
+    /* Darker emerald green */
+    transform: scale(1.05);
+}
