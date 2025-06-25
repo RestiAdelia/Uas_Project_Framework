@@ -10,7 +10,12 @@ class ResponController extends Controller
 {
     public function create($id_complain)
     {
-        return view('respon.create', compact('id_complain'));
+        return view('respons.create', compact('id_complain'));
+    }
+    public function index()
+    {
+        $respons = Respons::paginate(10);
+        return view('respons.index', compact('respons'));
     }
 
     public function store(Request $request)
@@ -28,5 +33,12 @@ class ResponController extends Controller
     {
         $complain = complain::with('respon')->findOrFail($id);
         return view('respon', compact('complain'));
+    }
+    public function destroy($id)
+    {
+        $respon = Respons::findOrFail($id);
+        $respon->delete();
+
+        return redirect()->route('respon.index')->with('success', 'Respon berhasil dihapus!');
     }
 }

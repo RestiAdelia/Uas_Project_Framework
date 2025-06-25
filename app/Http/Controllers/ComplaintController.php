@@ -4,23 +4,37 @@ namespace App\Http\Controllers;
 
 use App\Models\Complain;
 use App\Models\kategori;
+use App\Models\respons;
 use Illuminate\Http\Request;
 
 class ComplaintController extends Controller
 {
-    // Tampilkan semua pengaduan
+    // Tampilkan semua pengduan
     public function index()
     {
-        $complains = Complain::latest()->paginate(3); // Batas 6 data per halaman
+        $complains = Complain::latest()->paginate(3); // Batas 3 data per halaman
         return view('index', compact('complains'));
+    }
+  
+    public function show($id)
+    {
+        $complain = Complain::with('responses')->findOrFail($id);
+        return view('complaints.detail', compact('complain'));
+    }
+    public function list()
+    {
+        $complains = Complain::latest()->paginate(3); // Batas 6 data per halaman
+        return view('complaints.list', compact('complains'));
     }
 
     // Form tambah pengaduan (bawa id_pelapor)
     public function create(Request $request)
     {
         $id_pelapor = $request->id_pelapor;
-        $categories = kategori::all();
-        return view('complaints.complaints', compact('id_pelapor', 'categories'));
+        $categories = Kategori::all();
+        $complains = Complain::latest()->paginate(10);
+
+        return view('complaints.complaints', compact('id_pelapor', 'categories', 'complains'));
     }
 
     public function store(Request $request)
@@ -48,28 +62,43 @@ class ComplaintController extends Controller
 
         return redirect('/')->with('success', 'Data berhasil dikirim!');
     }
-
-    // Form edit pengaduan
-    public function edit($id)
+    // Tampilkan form respon
+    public function formRespon($id)
     {
-        $complain = Complain::findOrFail($id);
-        return view('complaints.edit', compact('complain'));
+        $complain = Complain::with('responses')->findOrFail($id);
+        return view('respons.create', compact('complain'));
     }
 
-    // Update pengaduan
-    public function update(Request $request, $id)
+    // Proses kirim respon
+    public function kirimRespon(Request $request, $id)
     {
         $request->validate([
-            'judul' => 'required|string|max:255',
-            'deskripsi' => 'required|string',
-            'status' => 'required|string',
+            'respon' => 'required|string',
+        ]);
+
+        Respons::create([
+            'complain_id' => $id,
+            'respon' => $request->respon
+        ]);
+
+        // Setelah submit, balik ke daftar complain
+        return redirect()->route('complaints.list')->with('success', 'Respon berhasil dikirim!');
+    }
+
+
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:terkirim,proses,selesai,ditolak'
         ]);
 
         $complain = Complain::findOrFail($id);
-        $complain->update($request->all());
+        $complain->status = $request->status;
+        $complain->save();
 
-        return redirect()->route('complain.index')->with('success', 'Pengaduan berhasil diupdate!');
+        return redirect()->back()->with('success', 'Status berhasil diperbarui.');
     }
+
 
     // Hapus pengaduan
     public function destroy($id)
@@ -77,6 +106,6 @@ class ComplaintController extends Controller
         $complain = Complain::findOrFail($id);
         $complain->delete();
 
-        return redirect()->route('complain.index')->with('success', 'Pengaduan berhasil dihapus!');
+        return redirect()->route('complaints.list')->with('success', 'Pengaduan berhasil dihapus!');
     }
 }

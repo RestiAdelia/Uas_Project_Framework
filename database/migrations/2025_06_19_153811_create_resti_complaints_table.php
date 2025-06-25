@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('kategori_id')->nullable()->constrained('resti_categories');
             $table->string('judul');
             $table->text('deskripsi');
-            $table->enum('status', ['terkirim', 'proses', 'selesai'])->default('terkirim');
+            $table->enum('status', ['terkirim', 'proses', 'selesai','ditolak'])->default('terkirim');
             $table->string('file');
             $table->timestamps();
         });

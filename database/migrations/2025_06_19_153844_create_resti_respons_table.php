@@ -1,4 +1,3 @@
-
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -13,11 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('resti_respons', function (Blueprint $table) {
-           $table->id();
-            $table->foreignId('complain_id')->constrained('resti_complaints');
+            $table->id();
+            $table->foreignId('complain_id')
+                  ->constrained('resti_complaints')
+                  ->onDelete('cascade'); // Tambahkan cascade delete
             $table->text('respon');
             $table->timestamps();
-
         });
     }
 

@@ -14,7 +14,7 @@ class respons extends Model
 
 
     protected $fillable = [
-        'id_complain',
+        'complain_id',
         'respon',
     ];
 
@@ -22,4 +22,5 @@ class respons extends Model
     {
         return $this->belongsTo(Complain::class, 'complain_id');
     }
+    
 }

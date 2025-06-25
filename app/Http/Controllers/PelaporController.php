@@ -24,4 +24,17 @@ class PelaporController extends Controller
 
        return redirect()->route('complain.create', ['id_pelapor' => $pelapor->id]);
     }
+    Public function index(){
+        $pelapor = Pelapor::paginate(10); // contoh: 10 data per halaman
+
+        return view('pelapor.list', compact('pelapor'));
+    }
+
+    public function destroy($id)
+    {
+        $pelapor = pelapor::findOrFail($id);
+        $pelapor->delete();
+
+        return redirect()->route('pelapor.index')->with('success', 'Pelapor berhasil dihapus!');
+    }
 }

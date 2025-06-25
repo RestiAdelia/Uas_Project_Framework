@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\complain;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +23,7 @@ class AuthController extends Controller
         );
         if (Auth::attempt($credentials)) {
             $reguest->session()->regenerate();
-            return redirect('home')->with('success', 'Login Successfully. Welcome ' . Auth::user()->name);
+            return redirect('homeadmin')->with('success', 'Login Successfully. Welcome ' . Auth::user()->name);
         }
         return back()->withErrors(
             ['email' => 'Email Not Found!']
@@ -37,5 +38,12 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('login');
+    }
+    public function index(){
+        $complains = complain::with(['pelapor', 'kategori']) // jika ada relasi
+                    ->latest()
+                    ->paginate(10); // sesuaikan jumlah per halaman
+
+    return view('complaints.list', compact('complains'));
     }
 }

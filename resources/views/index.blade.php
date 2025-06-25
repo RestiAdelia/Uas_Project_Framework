@@ -36,77 +36,137 @@
 
         <section id="Terajukan" class="features">
             <div class="container">
-                <article class="feature-card">
-                    <svg class="feature-icon" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10" />
-                        <path d="M8 12l2 2 4-4" />
-                    </svg>
-                    <h2 class="feature-title">Mudah Digunakan</h2>
-                    <p class="feature-desc">Antarmuka sederhana dan dokumentasi lengkap memudahkan penggunaan.</p>
-                </article>
-                <article class="feature-card">
-                    <svg class="feature-icon" viewBox="0 0 24 24">
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                        <path d="M3 9h18M9 21V9" />
-                    </svg>
-                    <h2 class="feature-title">Fleksibel</h2>
-                    <p class="feature-desc">Mudah disesuaikan dengan kebutuhan dan preferensi Anda.</p>
-                </article>
-                <article class="feature-card">
-                    <svg class="feature-icon" viewBox="0 0 24 24">
-                        <path d="M12 3v18M3 12h18" />
-                    </svg>
-                    <h2 class="feature-title">Ringan & Modular</h2>
-                    <p class="feature-desc">Hanya memuat fitur yang diperlukan sehingga performa tetap optimal.</p>
-                </article>
-                <article class="feature-card">
-                    <svg class="feature-icon" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10" />
-                        <path d="M8 14l4-4 4 4" />
-                    </svg>
-                    <h2 class="feature-title">Aksesibilitas</h2>
-                    <p class="feature-desc">Mendukung navigasi keyboard dan pembaca layar.</p>
-                </article>
+                <div class="feature-grid">
+                    <div class="row text-center">
+                        <!-- Statistik Terkirim -->
+                        <div class="col-md-3 mb-4">
+                            <article class="feature-card h-100">
+                                <svg class="feature-icon" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M8 12l2 2 4-4" />
+                                </svg>
+                                <h2 class="feature-title">Total Pengaduan</h2>
+                                <p class="feature-desc">Jumlah pengaduan: <strong>{{ $jumlahPengajuan }}</strong></p>
+                            </article>
+                        </div>
+
+                        <!-- Statistik Proses -->
+                        <div class="col-md-3 mb-4">
+                            <article class="feature-card h-100">
+                                <svg class="feature-icon" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M8 12l2 2 4-4" />
+                                </svg>
+                                <h2 class="feature-title">Diproses</h2>
+                                <p class="feature-desc">Jumlah pengaduan: <strong>{{ $jumlahProses }}</strong></p>
+                            </article>
+                        </div>
+
+                        <!-- Statistik Selesai -->
+                        <div class="col-md-3 mb-4">
+                            <article class="feature-card h-100">
+                                <svg class="feature-icon" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M8 12l2 2 4-4" />
+                                </svg>
+                                <h2 class="feature-title">Selesai</h2>
+                                <p class="feature-desc">Jumlah pengaduan: <strong>{{ $jumlahSelesai }}</strong></p>
+                            </article>
+                        </div>
+
+                        <!-- Statistik Ditolak -->
+                        <div class="col-md-3 mb-4">
+                            <article class="feature-card h-100">
+                                <svg class="feature-icon" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M8 12l2 2 4-4" />
+                                </svg>
+                                <h2 class="feature-title">Ditolak</h2>
+                                <p class="feature-desc">Jumlah pengaduan: <strong>{{ $jumlahDitolak }}</strong></p>
+                            </article>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
         </section>
         <!-- Daftar Pengaduan -->
-        <section id="Terajukan" class="pengaduan">
-            <div class="complain-grid">
-                @foreach ($complains as $complain)
-                    <div class="complain-card">
-                        @if ($complain->file)
-                            <img src="{{ asset('storage/' . $complain->file) }}" class="complain-image"
-                                alt="gambar complain">
-                        @else
-                            <img src="{{ asset('images/default.png') }}" class="complain-image" alt="default image">
-                        @endif
-                        <div class="complain-content">
-                            <h3>{{ $complain->judul }}</h3>
-                            <p>{{ \Illuminate\Support\Str::limit($complain->deskripsi, 80) }}</p>
+        <section id="Terajukan" class="pengaduan py-5 bg-white">
+            <div class="container" id="complain-container">
+                <div class="row g-4" id="complain-list">
+                    @foreach ($complains as $complain)
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 shadow-sm">
+                                @if ($complain->file)
+                                    <img src="{{ asset('storage/' . $complain->file) }}" class="card-img-top"
+                                        alt="gambar complain">
+                                @else
+                                    <img src="{{ asset('images/default.png') }}" class="card-img-top"
+                                        alt="default image">
+                                @endif
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $complain->judul }}</h5>
+                                    <p class="card-text">{{ \Illuminate\Support\Str::limit($complain->deskripsi, 80) }}
+                                    </p>
+                                </div>
+                                <div class="card-footer d-flex justify-content-between align-items-center">
+                                    <small class="text-muted">Status: {{ ucfirst($complain->status) }}</small>
+                                    <a href="{{ route('respon.show', $complain->id) }}"
+                                        class="btn btn-sm btn-outline-primary" title="Lihat Respon">💬</a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="complain-footer">
-                            <small>Status: {{ ucfirst($complain->status) }}</small>
-                            <a href="{{ route('respon.show', $complain->id) }}" class="respon-icon"
-                                title="Lihat Respon">💬</a>
-                        </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
+
+                <div class="d-flex justify-content-center mt-4" id="pagination-links">
+                    {{ $complains->links() }}
+                </div>
             </div>
-
-            <div class="d-flex justify-content-center mt-4">
-                {{ $complains->links() }}
-            </div>
-
-
-
         </section>
-
-
     </main>
 
-    <footer>
+    <footer class="text-center py-3 bg-light mt-5">
         &copy; 2024 Pengaduan Masyarakat. All rights reserved.
     </footer>
+
+    <!-- Script AJAX Pagination -->
+    <script>
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.pagination a')) {
+                e.preventDefault();
+                const url = e.target.closest('a').getAttribute('href');
+
+                fetch(url, {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    })
+                    .then(response => response.text())
+                    .then(html => {
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+
+                        const newList = doc.querySelector('#complain-list');
+                        const newPagination = doc.querySelector('#pagination-links');
+
+                        document.querySelector('#complain-list').innerHTML = newList.innerHTML;
+                        document.querySelector('#pagination-links').innerHTML = newPagination.innerHTML;
+
+                        // Scroll to top of complain list
+                        window.scrollTo({
+                            top: document.querySelector('#complain-container').offsetTop,
+                            behavior: 'smooth'
+                        });
+                    })
+                    .catch(err => {
+                        console.error('Pagination error:', err);
+                        alert('Gagal memuat data halaman.');
+                    });
+            }
+        });
+    </script>
 </body>
 
 </html>

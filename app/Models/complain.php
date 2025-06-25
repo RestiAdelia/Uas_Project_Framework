@@ -19,6 +19,7 @@ class complain extends Model
         return $this->belongsTo(Complain::class, 'complain_id');
     }
 
+
     public function pelapor()
     {
         return $this->belongsTo(Pelapor::class, 'id_pelapor');
@@ -32,4 +33,9 @@ class complain extends Model
     {
         return $this->belongsTo(Kategori::class, 'kategori_id');
     }
+
+    public function responses()
+{
+    return $this->hasMany(Respons::class, 'complain_id');
+}
 }
