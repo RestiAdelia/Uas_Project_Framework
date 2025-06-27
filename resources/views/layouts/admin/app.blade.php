@@ -7,7 +7,6 @@
     <title>@yield('title', 'Admin Submission Dashboard')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
@@ -58,6 +57,12 @@
                 <a href="{{ route('respon.index') }}" class="{{ Request::routeIs('respon.*') ? 'active' : '' }}">
                     <span class="material-icons">reply</span> Respon
                 </a>
+
+                <a href="{{ route('category.index') }}" class="{{ Request::routeIs('category.*') ? 'active' : '' }}">
+                    <span class="material-icons me-1">category</span> Kategori
+                </a>
+
+
             </nav>
         </aside>
         <main class="content">

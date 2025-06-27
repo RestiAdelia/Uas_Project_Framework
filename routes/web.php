@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PelaporController;
 use App\Http\Controllers\ResponController;
 
@@ -10,7 +11,7 @@ use App\Http\Controllers\JumlahPengaduanController;
 use App\Models\complain;
 
 Route::get('/', [JumlahPengaduanController::class, 'index']);
-// Route::get('/', [ComplaintController::class, 'index'])->name('home');
+
 
 
 Route::get('login', [AuthController::class, 'loginform'])->name('login');
@@ -27,12 +28,11 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/respons/{id}', [ResponController::class, 'destroy'])->name('respons.destroy');
     Route::delete('/complain/{id}', [ComplaintController::class, 'destroy'])->name('complain.destroy');
     Route::put('/complain/status/{id}', [ComplaintController::class, 'updateStatus'])->name('complain.updateStatus');
-
     Route::resource('complaints', ComplaintController::class);
-    Route::resource('pelapor', PelaporController::class);
     Route::resource('respon', ResponController::class);
+    Route::resource('category', CategoryController::class)->names('category');
 });
-
+ Route::resource('pelapor', PelaporController::class);
 Route::get('/complain', [ComplaintController::class, 'index'])->name('complain.index');
 Route::get('/pelapor/create', [PelaporController::class, 'create'])->name('pelapor.create');
 Route::get('/complain/create/{id_pelapor}', [ComplaintController::class, 'create'])->name('complain.create');

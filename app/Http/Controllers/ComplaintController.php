@@ -12,10 +12,10 @@ class ComplaintController extends Controller
     // Tampilkan semua pengduan
     public function index()
     {
-        $complains = Complain::latest()->paginate(3); // Batas 3 data per halaman
+        $complains = Complain::latest()->paginate(6);
         return view('index', compact('complains'));
     }
-  
+
     public function show($id)
     {
         $complain = Complain::with('responses')->findOrFail($id);
@@ -23,7 +23,7 @@ class ComplaintController extends Controller
     }
     public function list()
     {
-        $complains = Complain::latest()->paginate(3); // Batas 6 data per halaman
+        $complains = Complain::latest()->paginate(10);
         return view('complaints.list', compact('complains'));
     }
 
