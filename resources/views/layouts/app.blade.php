@@ -29,7 +29,7 @@
             </div>
         </div>
         <div class="footer-bottom text-center">
-            &copy; {{ date('Y') }} Pengaduan Masyarakat. All rights reserved.
+            &copy; {{ date('Y') }} Pengaduan Masyarakat. By Resti Adelia.
         </div>
     </footer>
 </body>

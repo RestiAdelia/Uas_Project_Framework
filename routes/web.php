@@ -20,6 +20,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth', RoleAdmin::class])->group(function () {
+    Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
     Route::get('/homeadmin', [AuthController::class, 'index'])->name('homeadmin');
     Route::get('/complaints/list', [ComplaintController::class, 'list'])->name('complaints.list');
     Route::get('/complain/{id}/respon', [ComplaintController::class, 'formRespon'])->name('complain.formRespon');

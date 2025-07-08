@@ -46,4 +46,19 @@ class AuthController extends Controller
 
     return view('complaints.list', compact('complains'));
     }
+    public function dashboard()
+{
+     $jumlahPengajuan = Complain::count();
+    $jumlahProses = Complain::where('status', 'diproses')->count();
+    $jumlahSelesai = Complain::where('status', 'selesai')->count();
+    $jumlahDitolak = Complain::where('status', 'ditolak')->count();
+
+    return view('admin.dashboard', compact(
+        'jumlahPengajuan',
+        'jumlahProses',
+        'jumlahSelesai',
+        'jumlahDitolak'
+    ));
+    
+}
 }
