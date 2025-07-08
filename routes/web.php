@@ -19,22 +19,27 @@ Route::get('login', [AuthController::class, 'loginform'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::middleware(['auth',RoleAdmin::class])->group(function () {
+Route::middleware(['auth', RoleAdmin::class])->group(function () {
     Route::get('/homeadmin', [AuthController::class, 'index'])->name('homeadmin');
     Route::get('/complaints/list', [ComplaintController::class, 'list'])->name('complaints.list');
     Route::get('/complain/{id}/respon', [ComplaintController::class, 'formRespon'])->name('complain.formRespon');
     Route::post('/complain/{id}/respon', [ComplaintController::class, 'kirimRespon'])->name('complain.kirimRespon');
-    Route::get('/respon/{id}', [ResponController::class, 'show'])->name('respon.show');
     Route::post('/respon/store', [ResponController::class, 'store'])->name('respon.store');
     Route::delete('/respons/{id}', [ResponController::class, 'destroy'])->name('respons.destroy');
     Route::delete('/complain/{id}', [ComplaintController::class, 'destroy'])->name('complain.destroy');
     Route::put('/complain/status/{id}', [ComplaintController::class, 'updateStatus'])->name('complain.updateStatus');
     Route::resource('complaints', ComplaintController::class);
-    Route::resource('respon', ResponController::class);
+    // Route::resource('respon', ResponController::class);
+    Route::get('/respon', [ResponController::class, 'index'])->name('respon.index');
+    Route::get('/respon/create/{id_complain}', [ResponController::class, 'create'])->name('respon.create');
+    Route::post('/respon', [ResponController::class, 'store'])->name('respon.store');
+    Route::delete('/respon/{id}', [ResponController::class, 'destroy'])->name('respon.destroy');
     Route::resource('category', CategoryController::class)->names('category');
 });
 
 Route::resource('pelapor', PelaporController::class);
+
+Route::get('/respon/{id}', [ResponController::class, 'show'])->name('respon.show');
 Route::get('/complain', [ComplaintController::class, 'index'])->name('complain.index');
 Route::get('/pelapor/create', [PelaporController::class, 'create'])->name('pelapor.create');
 Route::get('/complain/create/{id_pelapor}', [ComplaintController::class, 'create'])->name('complain.create');
