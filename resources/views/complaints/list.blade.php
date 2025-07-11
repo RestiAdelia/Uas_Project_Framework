@@ -16,6 +16,7 @@
                         <th>Judul</th>
                         <th>Gambar</th>
                         <th>Deskripsi</th>
+                        <th>Alamat</th>
                         <th>Status</th>
                         <th>Edit</th>
                         <th>Respon</th>
@@ -36,6 +37,7 @@
                                 @endif
                             </td>
                             <td>{{ \Illuminate\Support\Str::limit($item->deskripsi, 80) }}</td>
+                            <td>{{$item->alamat}}</td>
                             <td>
                                 @php
                                     $status = strtolower($item->status);

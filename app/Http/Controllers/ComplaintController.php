@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Complain;
 use App\Models\kategori;
 use App\Models\respons;
+use App\Models\pelapor;
 use Illuminate\Http\Request;
 
 class ComplaintController extends Controller
@@ -28,14 +29,16 @@ class ComplaintController extends Controller
     }
 
     // Form tambah pengaduan (bawa id_pelapor)
-    public function create(Request $request)
+    public function create($id_pelapor)
     {
-        $id_pelapor = $request->id_pelapor;
+        $pelapor = Pelapor::findOrFail($id_pelapor); // ambil data pelapor
+
         $categories = Kategori::all();
         $complains = Complain::latest()->paginate(10);
 
-        return view('complaints.complaints', compact('id_pelapor', 'categories', 'complains'));
+        return view('complaints.complaints', compact('id_pelapor', 'categories', 'complains', 'pelapor'));
     }
+
 
     public function store(Request $request)
     {
@@ -44,6 +47,7 @@ class ComplaintController extends Controller
             'id_pelapor' => 'required|exists:resti_pelapor,id',
             'judul' => 'required|string|max:255',
             'deskripsi' => 'required|string',
+            'alamat' => 'required|string',
             'kategori_id' => 'required|exists:resti_categories,id',
             'file' => 'nullable|file|mimes:jpg,jpeg,webp|max:2048', // max 2MB
         ]);

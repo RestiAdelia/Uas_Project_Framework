@@ -37,25 +37,18 @@
                                 <textarea name="respon" id="respon" class="form-control rounded-3 shadow-sm" rows="4" required></textarea>
                             </div>
                             <div class="d-flex justify-content-center gap-3 mt-4">
-                                <!-- Tombol Back -->
                                 <a href="{{ route('complaints.list') }}"
                                     class="btn d-flex align-items-center justify-content-center rounded-circle shadow-sm"
                                     style="border: 2px solid #FFD93D; color: #beaf02; background-color: #fff; width: 45px; height: 45px;">
                                     <i class="bi bi-arrow-left fs-5"></i>
                                 </a>
 
-                                <!-- Tombol Kirim -->
                                 <button type="submit"
                                     class="btn d-flex align-items-center justify-content-center rounded-circle shadow-sm"
                                     style="background-color: #FFD93D; color: #000; border: none; width: 45px; height: 45px;">
                                     <i class="bi bi-send fs-5"></i>
                                 </button>
                             </div>
-
-
-
-
-
                         </form>
                     </div>
                 </div>

@@ -9,10 +9,10 @@ class complain extends Model
 {
     use HasFactory;
 
-    protected $table = 'resti_complaints'; // HARUSNYA ini
+    protected $table = 'resti_complaints';
 
 
-    protected $fillable = ['id_pelapor', 'kategori_id', 'judul', 'deskripsi', 'status'];
+    protected $fillable = ['id_pelapor', 'kategori_id', 'judul','alamat', 'deskripsi', 'status'];
 
     public function complain()
     {
