@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>@yield('title', 'Login')</title>
+    <title>@yield('title', 'ladnding page')</title>
   <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+  
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 
@@ -29,7 +30,7 @@
             </div>
         </div>
         <div class="footer-bottom text-center">
-            &copy; {{ date('Y') }} Pengaduan Masyarakat. By Resti Adelia.
+            &copy; {{ date('Y') }} Pengaduan Masyarakat. By Resti Adelia
         </div>
     </footer>
 </body>

@@ -16,7 +16,7 @@ class PelaporController extends Controller
     {
         $request->validate([
             'nama' => 'required|string|max:40',
-            'nik' => 'required|string|max:16',
+            'nik' => 'required|string|max:16|min:15',
             'telepon' => 'required|string|max:15',
         ]);
 

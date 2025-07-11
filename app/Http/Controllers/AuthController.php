@@ -42,7 +42,7 @@ class AuthController extends Controller
     public function index(){
         $complains = complain::with(['pelapor', 'kategori']) // jika ada relasi
                     ->latest()
-                    ->paginate(10); // sesuaikan jumlah per halaman
+                    ->paginate(10); 
 
     return view('complaints.list', compact('complains'));
     }

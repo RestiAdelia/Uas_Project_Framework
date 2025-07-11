@@ -1,14 +1,67 @@
 @extends('layouts.app')
+
 @section('title', 'Data Pelapor')
+
 @section('content')
+<style>
+    .card-yellow {
+        border: none;
+        border-top: 4px solid #f1c40f;
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-yellow .card-header {
+        background-color: #fffbea;
+        border-bottom: none;
+        padding: 1.5rem;
+    }
+
+    .card-yellow h4 {
+        color: #d4ac0d;
+        font-weight: 700;
+    }
+
+    .btn-yellow {
+        background-color: #f1c40f;
+        border: none;
+        color: #222;
+        font-weight: 600;
+        transition: 0.3s;
+        padding: 12px;
+        border-radius: 8px;
+    }
+
+    .btn-yellow:hover {
+        background-color: #d4ac0d;
+        color: #fff;
+    }
+
+    .form-floating .form-control,
+    .form-select {
+        border-radius: 10px;
+        border-color: #f1c40f66;
+    }
+
+    .alert-success {
+        background-color: #fef9e7;
+        color: #7d6608;
+        border: 1px solid #f1c40f99;
+    }
+
+    .alert-danger {
+        background-color: #fff2f0;
+        border: 1px solid #f5c6cb;
+    }
+</style>
+
 <div class="container py-5">
     <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow-sm">
-                <div class="card-header d-flex justify-content-center align-items-center">
-                    <h4 class="mb-0">Form Pelapor</h4>
+        <div class="col-md-8">
+            <div class="card card-yellow">
+                <div class="card-header text-center">
+                    <h4>Form Pelapor</h4>
                 </div>
-
                 <div class="card-body">
 
                     @if ($errors->any())
@@ -24,40 +77,41 @@
                     <form id="pelaporForm" action="{{ route('pelapor.store') }}" method="POST">
                         @csrf
 
-                        <div class="mb-3">
-                            <label for="nama" class="form-label">Nama</label>
-                            <input type="text" name="nama" id="nama"
-                                   class="form-control @error('nama') is-invalid @enderror"
-                                   value="{{ old('nama') }}" required>
+                        <div class="form-floating mb-3">
+                            <input type="text" name="nama" id="nama" class="form-control @error('nama') is-invalid @enderror" placeholder="Nama" value="{{ old('nama') }}" required>
+                            <label for="nama">Nama</label>
                             @error('nama')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
 
-                        <div class="mb-3">
-                            <label for="nik" class="form-label">NIK</label>
-                            <input type="text" name="nik" id="nik"
-                                   class="form-control @error('nik') is-invalid @enderror"
-                                   value="{{ old('nik') }}" required>
+                        <div class="form-floating mb-3">
+                            <input type="text" name="nik" id="nik" class="form-control @error('nik') is-invalid @enderror" placeholder="NIK" value="{{ old('nik') }}" required>
+                            <label for="nik">NIK</label>
                             @error('nik')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
 
-                        <div class="mb-3">
-                            <label for="telepon" class="form-label">Telepon</label>
-                            <input type="text" name="telepon" id="telepon"
-                                   class="form-control @error('telepon') is-invalid @enderror"
-                                   value="{{ old('telepon') }}" required>
+                        <div class="form-floating mb-4">
+                            <input type="text" name="telepon" id="telepon" class="form-control @error('telepon') is-invalid @enderror" placeholder="Telepon" value="{{ old('telepon') }}" required>
+                            <label for="telepon">Telepon</label>
                             @error('telepon')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
 
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-success">Lanjut ke Pengaduan</button>
+                            <button type="submit" class="btn btn-yellow">Lanjut ke Pengaduan</button>
+                        </div>
+
+                        <div class="text-center mt-3">
+                            <a href="{{ url('/') }}" class="btn btn-outline-warning d-inline-flex align-items-center">
+                                <i class="bi bi-arrow-left me-2"></i> Kembali
+                            </a>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>

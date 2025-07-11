@@ -178,7 +178,7 @@
 
         </div>
         <div class="footer-bottom text-center">
-            &copy; {{ date('Y') }} Pengaduan Masyarakat. All rights reserved.
+            &copy; {{ date('Y') }} Pengaduan Masyarakat. By Resti adelia
         </div>
     </footer>
     <!-- Script AJAX Pagination -->
