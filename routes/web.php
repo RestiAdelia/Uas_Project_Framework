@@ -12,9 +12,6 @@ use App\Http\Middleware\RoleAdmin;
 use App\Models\complain;
 
 Route::get('/', [JumlahPengaduanController::class, 'index']);
-
-
-
 Route::get('login', [AuthController::class, 'loginform'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -30,8 +27,6 @@ Route::middleware(['auth', RoleAdmin::class])->group(function () {
     Route::delete('/complain/{id}', [ComplaintController::class, 'destroy'])->name('complain.destroy');
     Route::put('/complain/status/{id}', [ComplaintController::class, 'updateStatus'])->name('complain.updateStatus');
     Route::resource('complaints', ComplaintController::class);
-    
-    // Route::resource('respon', ResponController::class);
     Route::get('/respon', [ResponController::class, 'index'])->name('respon.index');
     Route::get('/respon/create/{id_complain}', [ResponController::class, 'create'])->name('respon.create');
     Route::post('/respon', [ResponController::class, 'store'])->name('respon.store');

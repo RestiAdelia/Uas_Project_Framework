@@ -3,130 +3,85 @@
 @section('title', 'Data Pelapor')
 
 @section('content')
-<style>
-    .card-yellow {
-        border: none;
-        border-top: 4px solid #f1c40f;
-        border-radius: 12px;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-    }
+    <link rel="stylesheet" href="{{ asset('css/pelapor.css') }}">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card card-yellow">
+                    <div class="card-header text-center">
+                        <h4>Form Pelapor</h4>
+                    </div>
+                    <div class="card-body">
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul class="mb-0">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
 
-    .card-yellow .card-header {
-        background-color: #fffbea;
-        border-bottom: none;
-        padding: 1.5rem;
-    }
+                        <form id="pelaporForm" action="{{ route('pelapor.store') }}" method="POST">
+                            @csrf
 
-    .card-yellow h4 {
-        color: #d4ac0d;
-        font-weight: 700;
-    }
+                            <div class="form-floating mb-3">
+                                <input type="text" name="nama" id="nama"
+                                    class="form-control @error('nama') is-invalid @enderror" placeholder="Nama"
+                                    value="{{ old('nama') }}" required>
+                                <label for="nama">Nama</label>
+                                @error('nama')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
 
-    .btn-yellow {
-        background-color: #f1c40f;
-        border: none;
-        color: #222;
-        font-weight: 600;
-        transition: 0.3s;
-        padding: 12px;
-        border-radius: 8px;
-    }
+                            <div class="form-floating mb-3">
+                                <input type="text" name="nik" id="nik"
+                                    class="form-control @error('nik') is-invalid @enderror" placeholder="NIK"
+                                    value="{{ old('nik') }}" required>
+                                <label for="nik">NIK</label>
+                                @error('nik')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
 
-    .btn-yellow:hover {
-        background-color: #d4ac0d;
-        color: #fff;
-    }
+                            <div class="form-floating mb-4">
+                                <input type="text" name="telepon" id="telepon"
+                                    class="form-control @error('telepon') is-invalid @enderror" placeholder="Telepon"
+                                    value="{{ old('telepon') }}" required>
+                                <label for="telepon">Telepon</label>
+                                @error('telepon')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
 
-    .form-floating .form-control,
-    .form-select {
-        border-radius: 10px;
-        border-color: #f1c40f66;
-    }
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-yellow">Lanjut ke Pengaduan</button>
+                            </div>
 
-    .alert-success {
-        background-color: #fef9e7;
-        color: #7d6608;
-        border: 1px solid #f1c40f99;
-    }
+                            <div class="text-center mt-3">
+                                <a href="{{ url('/') }}"
+                                    class="btn btn-outline-warning d-inline-flex align-items-center">
+                                    <i class="bi bi-arrow-left me-2"></i> Kembali
+                                </a>
+                            </div>
+                        </form>
 
-    .alert-danger {
-        background-color: #fff2f0;
-        border: 1px solid #f5c6cb;
-    }
-</style>
-
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card card-yellow">
-                <div class="card-header text-center">
-                    <h4>Form Pelapor</h4>
-                </div>
-                <div class="card-body">
-
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul class="mb-0">
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
-                    <form id="pelaporForm" action="{{ route('pelapor.store') }}" method="POST">
-                        @csrf
-
-                        <div class="form-floating mb-3">
-                            <input type="text" name="nama" id="nama" class="form-control @error('nama') is-invalid @enderror" placeholder="Nama" value="{{ old('nama') }}" required>
-                            <label for="nama">Nama</label>
-                            @error('nama')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="form-floating mb-3">
-                            <input type="text" name="nik" id="nik" class="form-control @error('nik') is-invalid @enderror" placeholder="NIK" value="{{ old('nik') }}" required>
-                            <label for="nik">NIK</label>
-                            @error('nik')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="form-floating mb-4">
-                            <input type="text" name="telepon" id="telepon" class="form-control @error('telepon') is-invalid @enderror" placeholder="Telepon" value="{{ old('telepon') }}" required>
-                            <label for="telepon">Telepon</label>
-                            @error('telepon')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-yellow">Lanjut ke Pengaduan</button>
-                        </div>
-
-                        <div class="text-center mt-3">
-                            <a href="{{ url('/') }}" class="btn btn-outline-warning d-inline-flex align-items-center">
-                                <i class="bi bi-arrow-left me-2"></i> Kembali
-                            </a>
-                        </div>
-                    </form>
-
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    document.getElementById('pelaporForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        if (confirm("Data pelapor sudah benar? Data Anda akan disimpan! Lanjut ke Form Pengaduan?")) {
-            e.target.submit();
-        } else {
-            alert("Data Anda dibatalkan.");
-            window.location.href = '/';
-        }
-    });
-</script>
+    <script>
+        document.getElementById('pelaporForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (confirm("Data pelapor sudah benar? Data Anda akan disimpan! Lanjut ke Form Pengaduan?")) {
+                e.target.submit();
+            } else {
+                alert("Data Anda dibatalkan.");
+                window.location.href = '/';
+            }
+        });
+    </script>
 @endsection

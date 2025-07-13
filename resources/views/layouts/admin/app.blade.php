@@ -20,38 +20,32 @@
         <div class="logo">Pengajuan</div>
         <div class="spacer"></div>
         <div class="dropdown d-flex align-items-center gap-2">
-    <span class="material-icons text-dark">person</span>
-    <span class="text-dark">
-        @auth
-            {{ Auth::user()->name }}
-        @else
-            Tamu
-        @endauth
-    </span>
-
-    @auth
-        <!-- Ikon dropdown sebagai trigger -->
-        <a href="#" class="dropdown-toggle text-dark" id="dropdownIcon" data-bs-toggle="dropdown" aria-expanded="false">
-          
-        </a>
-
-        <!-- Dropdown menu -->
-        <ul class="dropdown-menu dropdown-menu-end bg-dark text-white" aria-labelledby="dropdownIcon">
-            <li>
-                <form action="{{ route('logout') }}" method="POST" onsubmit="return confirm('Yakin ingin logout?');">
-                    @csrf
-                    <button type="submit" class="dropdown-item d-flex align-items-center gap-2 text-white bg-dark">
-                        <span class="material-icons">logout</span> Logout
-                    </button>
-                </form>
-            </li>
-        </ul>
-    @endauth
-</div>
-
+            <span class="material-icons text-dark">person</span>
+            <span class="text-dark">
+                @auth
+                    {{ Auth::user()->name }}
+                @else
+                    Tamu
+                @endauth
+            </span>
+            @auth
+                <a href="#" class="dropdown-toggle text-dark" id="dropdownIcon" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end bg-dark text-white" aria-labelledby="dropdownIcon">
+                    <li>
+                        <form action="{{ route('logout') }}" method="POST"
+                            onsubmit="return confirm('Yakin ingin logout?');">
+                            @csrf
+                            <button type="submit" class="dropdown-item d-flex align-items-center gap-2 text-white bg-dark">
+                                <span class="material-icons">logout</span> Logout
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            @endauth
+        </div>
     </header>
-
-
     <div class="dashboard">
         <aside class="sidebar">
             <nav>
@@ -71,8 +65,6 @@
                 <a href="{{ route('category.index') }}" class="{{ Request::routeIs('category.*') ? 'active' : '' }}">
                     <span class="material-icons me-1">category</span> Kategori
                 </a>
-
-
             </nav>
         </aside>
         <main class="content">
@@ -84,5 +76,4 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 </html>

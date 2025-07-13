@@ -1,7 +1,7 @@
 /* Global Styles */
 body {
     background-color: #f9fafb;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Container Style */
@@ -15,7 +15,8 @@ body {
 }
 
 /* Title */
-h2, .form-title {
+h2,
+.form-title {
     text-align: center;
     color: #333;
     margin-bottom: 20px;
@@ -88,4 +89,59 @@ button.btn-success:hover {
     font-size: 20px;
     align-items: center;
     height: 60px; /* opsional, untuk tinggi tetap */
+}
+
+.card-yellow {
+    border: none;
+    border-top: 4px solid #f1c40f;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-yellow .card-header {
+    background-color: #fffbea;
+    border-bottom: none;
+    padding: 1.5rem;
+}
+
+.card-yellow h4 {
+    color: #d4ac0d;
+    font-weight: 700;
+}
+
+.btn-yellow {
+    background-color: #f1c40f;
+    border: none;
+    color: #222;
+    font-weight: 600;
+    transition: 0.3s;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+.btn-yellow:hover {
+    background-color: #d4ac0d;
+    color: #fff;
+}
+
+.form-label,
+.form-floating label {
+    font-weight: 500;
+}
+
+.form-floating .form-control,
+.form-select {
+    border-radius: 10px;
+    border-color: #f1c40f66;
+}
+
+.alert-success {
+    background-color: #fef9e7;
+    color: #7d6608;
+    border: 1px solid #f1c40f99;
+}
+
+.alert-danger {
+    background-color: #fff2f0;
+    border: 1px solid #f5c6cb;
 }

@@ -6,7 +6,6 @@
         @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
-
         <div class="table-responsive bg-white p-4 shadow-sm">
             <table class="table-warning text-dark">
                 <thead>
@@ -94,8 +93,6 @@
                     @endforeach
                 </tbody>
             </table>
-
-            <!-- Tambahkan Paginator -->
             <div class="mt-4 d-flex justify-content-center">
                 {{ $complains->links() }}
             </div>
