@@ -23,7 +23,7 @@ class AuthController extends Controller
         );
         if (Auth::attempt($credentials)) {
             $reguest->session()->regenerate();
-            return redirect('homeadmin')->with('success', 'Login Successfully. Welcome ' . Auth::user()->name);
+            return redirect('dashboard')->with('success', 'Login Successfully. Welcome ' . Auth::user()->name);
         }
         return back()->withErrors(
             ['email' => 'Email Not Found!']
@@ -42,23 +42,27 @@ class AuthController extends Controller
     public function index(){
         $complains = complain::with(['pelapor', 'kategori']) // jika ada relasi
                     ->latest()
-                    ->paginate(10); 
+                    ->paginate(10);
 
     return view('complaints.list', compact('complains'));
     }
     public function dashboard()
 {
-     $jumlahPengajuan = Complain::count();
-    $jumlahProses = Complain::where('status', 'diproses')->count();
-    $jumlahSelesai = Complain::where('status', 'selesai')->count();
-    $jumlahDitolak = Complain::where('status', 'ditolak')->count();
+      $jumlahPengajuan = Complain::where('status', '!=', 'ditolak')->count();
 
-    return view('admin.dashboard', compact(
-        'jumlahPengajuan',
-        'jumlahProses',
-        'jumlahSelesai',
-        'jumlahDitolak'
-    ));
-    
+        $jumlahProses = Complain::where('status', 'proses')->count();
+        $jumlahSelesai = Complain::where('status', 'selesai')->count();
+        $jumlahDitolak = Complain::where('status', 'ditolak')->count();
+
+        $complains = Complain::latest()->paginate(6);
+
+        return view('admin.dashboard', compact(
+            'jumlahPengajuan',
+            'jumlahProses',
+            'jumlahSelesai',
+            'jumlahDitolak',
+            'complains'
+        ));
+
 }
 }

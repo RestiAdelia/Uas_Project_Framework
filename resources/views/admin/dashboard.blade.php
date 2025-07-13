@@ -58,11 +58,14 @@
                 </div>
             </div>
 
-            <div class="mt-4 d-flex justify-content-center">
-                <div class="card shadow-sm p-4 w-100" style="max-width: 700px;">
-                    <h4 class="text-center mb-3">Diagram Status Pengaduan</h4>
-                    <div style="height: 280px;">
-                        <canvas id="pengaduanChart"></canvas>
+            <div class="row">
+            <div class="col-12">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-white text-center">
+                        <h5 class="mb-0 fw-semibold">Diagram Status Pengaduan</h5>
+                    </div>
+                    <div class="card-body" style="height: 400px;">
+                        <canvas id="pengaduanChart" class="w-100 h-100"></canvas>
                     </div>
                 </div>
 

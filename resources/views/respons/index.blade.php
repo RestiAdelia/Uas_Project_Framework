@@ -5,9 +5,9 @@
 @section('content')
     <div class="container py-6">
         <h2 class="mb-4 fw-semibold ">Data Respon Pengaduan</h2>
-        <div class="table-responsive bg-white p-4 rounded-4 shadow-sm">
-            <table class="table table-bordered align-middle mb-0">
-                <thead class="table-warning text-dark">
+        <div class="table-responsive bg-white p-4 shadow-sm">
+            <table class="table-warning text-dark">
+                <thead>
                     <tr>
                         <th>No</th>
                         <th>Nama Pelapor</th>

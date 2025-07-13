@@ -7,9 +7,9 @@
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
 
-        <div class="table-responsive bg-white p-4 rounded-4 shadow-sm">
-            <table class="table table-bordered align-middle mb-0">
-                <thead class="table-warning text-dark">
+        <div class="table-responsive bg-white p-4 shadow-sm">
+            <table class="table-warning text-dark">
+                <thead>
                     <tr>
                         <th>No</th>
                         <th>Nama Pelapor</th>

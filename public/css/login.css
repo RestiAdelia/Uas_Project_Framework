@@ -1,37 +1,61 @@
-.login-form {
-    background: #fff;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-}
 
-.login-form input {
-    width: 100%;
-    padding: 12px 15px;
-    margin-bottom: 15px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    font-size: 15px;
-}
+        body {
+            background-color: #fffef4;
+        }
 
-.login-form button {
-    width: 100%;
-    background-color: #ffc107;
-    border: none;
-    color: #000;
-    font-weight: bold;
-    padding: 12px;
-    border-radius: 10px;
-    transition: background-color 0.3s ease;
-}
+        .login-form {
+            max-width: 400px;
+            margin: 80px auto;
+            padding: 30px 25px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            border-top: 4px solid #f1c40f;
+        }
 
-.login-form button:hover {
-    background-color: #e0a800;
-}
+        .login-form h2 {
+            color: #d4ac0d;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
 
-.error-text {
-    color: red;
-    font-size: 14px;
-    margin-top: -10px;
-    margin-bottom: 10px;
-}
+        .login-form input[type="email"],
+        .login-form input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #f1c40f66;
+            background-color: #fffdf2;
+        }
+
+        .login-form input:focus {
+            outline: none;
+            border-color: #f1c40f;
+            box-shadow: 0 0 0 2px #fff3cd;
+        }
+
+        .login-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #f1c40f;
+            border: none;
+            color: #222;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .login-form button:hover {
+            background-color: #d4ac0d;
+            color: #fff;
+        }
+
+        .error-text {
+            color: #e74c3c;
+            font-size: 0.875rem;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+        
+

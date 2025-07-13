@@ -30,6 +30,7 @@ Route::middleware(['auth', RoleAdmin::class])->group(function () {
     Route::delete('/complain/{id}', [ComplaintController::class, 'destroy'])->name('complain.destroy');
     Route::put('/complain/status/{id}', [ComplaintController::class, 'updateStatus'])->name('complain.updateStatus');
     Route::resource('complaints', ComplaintController::class);
+    
     // Route::resource('respon', ResponController::class);
     Route::get('/respon', [ResponController::class, 'index'])->name('respon.index');
     Route::get('/respon/create/{id_complain}', [ResponController::class, 'create'])->name('respon.create');
